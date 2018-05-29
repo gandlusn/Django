@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>BLOG!</title>
+  </head>
+<body >
+    <div style="background-color: black;">
+    <h1 style="text-align: center;color:gold;">*** HOME ***</h1>
+    <a href="{% url 'posts:create' %}" class="float-right" style="color:blanchedalmond;margin: -3% 3%;text-decoration:  none;">New-Post</a>   
+    </div>
+
+    
+
+
+
+    
+
+
+
+  
+<div class="container" style="display: flex; align-content: center center; margin:-7%   21%">
+
+<div style="margin:100px 0px;align-content: center;">   
+
+
+<br/> 
+
+
+<div  style="">
+{% for post in posts.all %}
+<div   style="box-shadow: black 6px 3px 4px 5px;color:white;background-color: black;width: 70%;height: 20%;margin:25px;padding:30px; border-bottom-color: gold;border-right-color: gold;border:4px 5px" >
+
+  <span style="color:white"><p style="text-align: left">
+   
+     
+<p style="text-align: center; background-color: darkgoldenrod">     {{post.votes_total}} </p>
+  
+<p style="text-align: center;">    <a href="{{post.url}}" style="text-decoration:  none;">{{ post.title }}</a></p>
+</span>
+<br/>
+<br/>
+<p style="text-align: center">{{post.content}}</p>
+<br/>
+<br/>   
+<p style="text-align: center">{{post.pub_date}} by {{post.author.username}}</p>
+<br/>
+
+  <div class="d-flex justify-content-between">
+  <form method="POST" action='{% url "posts:upvote" post.id %}' >
+      {% csrf_token %}
+      
+      <input type="submit" value="Like" style="color: wheat;background-color: transparent; border: 0px; margin: -100px 0px  "  >
+      </form>
+  <form method="POST" action='{% url "posts:downvote" post.id %}' style="margin:0px 90%">
+      {% csrf_token %}
+      <input type="submit" value="UnLike"  style="color: wheat;background-color: transparent; border: 0px">
+  </form>
+  </div>    
+
+</div>
+
+
+
+{% endfor %}
+</div>
+
+
+</div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
+
